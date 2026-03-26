@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GenUI Widgets Demo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(11, 132, 122, 0.12), transparent 32rem),
+          linear-gradient(135deg, #f5f2ea 0%, #f4f7fb 48%, #eef3f1 100%);
+        color: #13211d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+      }
+
+      .demo-shell {
+        width: min(1400px, 100%);
+        margin: 0 auto;
+        padding: 32px 20px 40px;
+      }
+
+      .demo-header {
+        display: grid;
+        gap: 12px;
+        margin-bottom: 32px;
+      }
+
+      .demo-kicker {
+        margin: 0;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #0b7469;
+      }
+
+      .demo-title {
+        margin: 0;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: clamp(2.2rem, 5vw, 4.6rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      .demo-subtitle {
+        margin: 0;
+        max-width: 60rem;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: #40544e;
+      }
+
+      .demo-sections {
+        display: grid;
+        gap: 28px;
+      }
+
+      .demo-section {
+        display: grid;
+        gap: 18px;
+      }
+
+      .section-header {
+        display: grid;
+        gap: 8px;
+      }
+
+      .section-kicker {
+        margin: 0;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #0b7469;
+      }
+
+      .section-title {
+        margin: 0;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+
+      .section-copy {
+        margin: 0;
+        max-width: 54rem;
+        line-height: 1.6;
+        color: #40544e;
+      }
+
+      .preview-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .preview-panel {
+        position: relative;
+        overflow: hidden;
+        border-radius: 28px;
+        border: 1px solid rgba(19, 33, 29, 0.08);
+        box-shadow: 0 20px 60px rgba(16, 35, 32, 0.08);
+      }
+
+      .preview-panel--light {
+        background:
+          radial-gradient(circle at top right, rgba(11, 132, 122, 0.12), transparent 22rem),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 248, 246, 0.98));
+      }
+
+      .preview-panel--dark {
+        background:
+          radial-gradient(circle at top right, rgba(78, 219, 198, 0.16), transparent 18rem),
+          linear-gradient(180deg, #14211e, #0d1413);
+        color: #ecf5f3;
+      }
+
+      .preview-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 20px 0;
+      }
+
+      .preview-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .preview-label::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: currentColor;
+      }
+
+      .preview-panel--light .preview-label {
+        color: #0b7469;
+      }
+
+      .preview-panel--dark .preview-label {
+        color: #67e1cd;
+      }
+
+      .preview-caption {
+        margin: 0;
+        font-size: 0.88rem;
+        color: inherit;
+        opacity: 0.7;
+      }
+
+      .preview-mount {
+        min-height: 100%;
+        padding: 20px;
+      }
+
+      .preview-frame {
+        min-height: 540px;
+        border-radius: 22px;
+        padding: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .preview-panel--light .preview-frame {
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(19, 33, 29, 0.06);
+      }
+
+      .preview-panel--dark .preview-frame {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      @media (max-width: 900px) {
+        .preview-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .preview-frame {
+          min-height: 420px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="demo-shell">
+      <header class="demo-header">
+        <p class="demo-kicker">GenUI Widgets</p>
+        <h1 class="demo-title">Template Preview Gallery</h1>
+        <p class="demo-subtitle">
+          Compare a native widget object and a Jinja-powered widget string, each rendered in light
+          and dark themes from the same runtime.
+        </p>
+      </header>
+
+      <div class="demo-sections">
+        <section class="demo-section">
+          <div class="section-header">
+            <p class="section-kicker">Native JSON</p>
+            <h2 class="section-title">Calendar Card Preview</h2>
+            <p class="section-copy">
+              A native widget object rendered in parallel with the default and dark token sets.
+            </p>
+          </div>
+
+          <div class="preview-grid">
+            <article class="preview-panel preview-panel--light">
+              <div class="preview-meta">
+                <p class="preview-label">Normal Mode</p>
+                <p class="preview-caption">Default token set</p>
+              </div>
+              <div class="preview-mount">
+                <div id="light-demo" class="preview-frame"></div>
+              </div>
+            </article>
+
+            <article class="preview-panel preview-panel--dark">
+              <div class="preview-meta">
+                <p class="preview-label">Dark Mode</p>
+                <p class="preview-caption">`darkTheme` preset</p>
+              </div>
+              <div class="preview-mount">
+                <div id="dark-demo" class="preview-frame"></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="demo-section">
+          <div class="section-header">
+            <p class="section-kicker">`.widget` File</p>
+            <h2 class="section-title">Person Card</h2>
+            <p class="section-copy">
+              This example starts from raw `.widget` JSON, extracts the embedded template, and
+              renders it with live person data through `templateContext`.
+            </p>
+          </div>
+
+          <div class="preview-grid">
+            <article class="preview-panel preview-panel--light">
+              <div class="preview-meta">
+                <p class="preview-label">Normal Mode</p>
+                <p class="preview-caption">`.widget` JSON -> template</p>
+              </div>
+              <div class="preview-mount">
+                <div id="light-widget-file-demo" class="preview-frame"></div>
+              </div>
+            </article>
+
+            <article class="preview-panel preview-panel--dark">
+              <div class="preview-meta">
+                <p class="preview-label">Dark Mode</p>
+                <p class="preview-caption">Same extracted template</p>
+              </div>
+              <div class="preview-mount">
+                <div id="dark-widget-file-demo" class="preview-frame"></div>
+              </div>
+            </article>
+          </div>
+        </section>
+        <section class="demo-section">
+          <div class="section-header">
+            <p class="section-kicker">Component</p>
+            <h2 class="section-title">Badge Colors</h2>
+            <p class="section-copy">
+              All badge color options across soft, solid, and outline variants in both light and dark themes.
+            </p>
+          </div>
+
+          <div class="preview-grid">
+            <article class="preview-panel preview-panel--light">
+              <div class="preview-meta">
+                <p class="preview-label">Normal Mode</p>
+                <p class="preview-caption">All badge variants</p>
+              </div>
+              <div class="preview-mount">
+                <div id="light-badge-demo" class="preview-frame"></div>
+              </div>
+            </article>
+
+            <article class="preview-panel preview-panel--dark">
+              <div class="preview-meta">
+                <p class="preview-label">Dark Mode</p>
+                <p class="preview-caption">All badge variants</p>
+              </div>
+              <div class="preview-mount">
+                <div id="dark-badge-demo" class="preview-frame"></div>
+              </div>
+            </article>
+          </div>
+        </section>
+        <section class="demo-section">
+          <div class="section-header">
+            <p class="section-kicker">Component</p>
+            <h2 class="section-title">Button Colors</h2>
+            <p class="section-copy">
+              All button color options across solid, soft, outline, and ghost variants in both light and dark themes.
+            </p>
+          </div>
+
+          <div class="preview-grid">
+            <article class="preview-panel preview-panel--light">
+              <div class="preview-meta">
+                <p class="preview-label">Normal Mode</p>
+                <p class="preview-caption">All button variants</p>
+              </div>
+              <div class="preview-mount">
+                <div id="light-button-demo" class="preview-frame"></div>
+              </div>
+            </article>
+
+            <article class="preview-panel preview-panel--dark">
+              <div class="preview-meta">
+                <p class="preview-label">Dark Mode</p>
+                <p class="preview-caption">All button variants</p>
+              </div>
+              <div class="preview-mount">
+                <div id="dark-button-demo" class="preview-frame"></div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script type="module">
+      import { darkTheme, defaultTheme, extractTemplateFromWidgetFile, render } from '../src/index.ts';
+      import {airlineLogo} from "../tests/visual/templates/assets.ts";
+
+      const date = {
+        name: 'Friday',
+        number: '28',
+      };
+
+      const events = [
+        {
+          id: 'lunch',
+          title: 'Lunch',
+          time: '12:00 - 12:45 PM',
+          color: 'red-400',
+          isNew: false,
+        },
+        {
+          id: 'roadmap',
+          title: 'Q1 roadmap review',
+          time: '1:00 - 2:00 PM',
+          color: 'blue-400',
+          isNew: true,
+        },
+        {
+          id: 'standup',
+          title: 'Team standup',
+          time: '3:30 - 4:00 PM',
+          color: 'red-400',
+          isNew: false,
+        },
+      ];
+
+      const calendarTemplate = {
+        type: 'Card',
+        size: 'md',
+        confirm: { label: 'Add to calendar', action: { type: 'calendar.add' } },
+        cancel: { label: 'Discard', action: { type: 'calendar.discard' } },
+        children: [
+          {
+            type: 'Row',
+            align: 'start',
+            gap: 4,
+            children: [
+              {
+                type: 'Col',
+                align: 'start',
+                gap: 1,
+                width: '80px',
+                children: [
+                  { type: 'Caption', value: date.name, size: 'lg', color: 'secondary' },
+                  { type: 'Title', value: date.number, size: '3xl' },
+                ],
+              },
+              {
+                type: 'Col',
+                flex: 'auto',
+                gap: 3,
+                children: events.map((item) => ({
+                  type: 'Row',
+                  padding: { x: 3, y: 2 },
+                  gap: 3,
+                  radius: 'xl',
+                  background: item.isNew ? 'none' : 'surface-secondary',
+                  border: item.isNew
+                    ? { size: 1, color: item.color, style: 'dashed' }
+                    : undefined,
+                  children: [
+                    {
+                      type: 'Box',
+                      width: '4px',
+                      height: '40px',
+                      radius: 'full',
+                      background: item.color,
+                    },
+                    {
+                      type: 'Col',
+                      gap: 1,
+                      children: [
+                        { type: 'Text', value: item.title },
+                        { type: 'Text', value: item.time, size: 'sm', color: 'tertiary' },
+                      ],
+                    },
+                  ],
+                })),
+              },
+            ],
+          },
+        ],
+      };
+
+      const personWidgetFile = {
+        version: '1.0',
+        name: 'Person card',
+        template:
+          '{"type":"Card","size":"sm","children":[{"type":"Row","gap":3,"align":"center","children":[{"type":"Image","src":{{ (image) | tojson }},"alt":{{ (name) | tojson }},"size":56,"aspectRatio":1,"radius":"full","frame":true},{"type":"Col","gap":0,"children":[{"type":"Title","value":{{ (name) | tojson }},"size":"md"},{"type":"Text","value":{{ (jobTitle) | tojson }},"size":"sm","color":"secondary"}]}]},{"type":"Divider"},{"type":"Col","gap":2,"children":[{"type":"Row","gap":2,"children":[{"type":"Icon","name":"phone","size":"sm","color":"secondary"},{"type":"Text","value":{{ (phone) | tojson }},"size":"sm"}]},{"type":"Row","gap":2,"children":[{"type":"Icon","name":"mail","size":"sm","color":"secondary"},{"type":"Text","value":{{ (email) | tojson }},"size":"sm","maxLines":1}]}]}]}',
+        outputJsonPreview: {
+          type: 'Card',
+          size: 'sm',
+        },
+      };
+
+      const personWidgetTemplate = extractTemplateFromWidgetFile(JSON.stringify(personWidgetFile));
+      const personContext = {
+        image: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Portrait_placeholder.svg',
+        name: 'John Miller',
+        jobTitle: 'Senior Product Manager',
+        phone: '+1 (555) 014-8899',
+        email: 'john.miller@example.com',
+      };
+
+      const actionHooks = [
+        async (action) => {
+          await new Promise((resolve) => window.setTimeout(resolve, 1000));
+          console.log('Widget action:', action);
+        },
+      ];
+
+      const lightMount = document.getElementById('light-demo');
+      const darkMount = document.getElementById('dark-demo');
+
+      const lightDemo = render(lightMount, calendarTemplate, {
+        actionHooks,
+        theme: defaultTheme,
+      });
+
+      const darkDemo = render(darkMount, calendarTemplate, {
+        actionHooks,
+        theme: darkTheme,
+      });
+
+      const lightWidgetFileMount = document.getElementById('light-widget-file-demo');
+      const darkWidgetFileMount = document.getElementById('dark-widget-file-demo');
+
+      const lightWidgetFileDemo = render(lightWidgetFileMount, personWidgetTemplate, {
+        actionHooks,
+        theme: defaultTheme,
+        templateContext: personContext,
+      });
+
+      const darkWidgetFileDemo = render(darkWidgetFileMount, personWidgetTemplate, {
+        actionHooks,
+        theme: darkTheme,
+        templateContext: personContext,
+      });
+
+      const badgeColors = ['secondary', 'success', 'danger', 'warning', 'info', 'discovery'];
+      const badgeVariants = ['soft', 'solid', 'outline'];
+
+      const badgeTemplate = {
+        type: 'Card',
+        size: 'lg',
+        children: badgeVariants.map((variant) => ({
+          type: 'Col',
+          gap: 2,
+          children: [
+            { type: 'Caption', value: variant.charAt(0).toUpperCase() + variant.slice(1), size: 'sm', color: 'secondary' },
+            {
+              type: 'Row',
+              gap: 2,
+              wrap: true,
+              children: badgeColors.map((color) => ({
+                type: 'Badge',
+                label: color.charAt(0).toUpperCase() + color.slice(1),
+                color,
+                variant,
+              })),
+            },
+          ],
+        })),
+      };
+
+      const lightBadgeMount = document.getElementById('light-badge-demo');
+      const darkBadgeMount = document.getElementById('dark-badge-demo');
+
+      const lightBadgeDemo = render(lightBadgeMount, badgeTemplate, {
+        theme: defaultTheme,
+      });
+
+      const darkBadgeDemo = render(darkBadgeMount, badgeTemplate, {
+        theme: darkTheme,
+      });
+
+      const buttonColors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'discovery', 'caution'];
+      const buttonVariants = ['solid', 'soft', 'outline', 'ghost'];
+
+      const buttonTemplate = {
+        type: 'Card',
+        size: 'lg',
+        children: buttonVariants.map((variant) => ({
+          type: 'Col',
+          gap: 2,
+          children: [
+            { type: 'Caption', value: variant.charAt(0).toUpperCase() + variant.slice(1), size: 'sm', color: 'secondary' },
+            {
+              type: 'Row',
+              gap: 2,
+              wrap: true,
+              children: buttonColors.map((color) => ({
+                type: 'Button',
+                label: color.charAt(0).toUpperCase() + color.slice(1),
+                color,
+                variant,
+                size: 'sm',
+              })),
+            },
+          ],
+        })),
+      };
+
+      const lightButtonMount = document.getElementById('light-button-demo');
+      const darkButtonMount = document.getElementById('dark-button-demo');
+
+      const lightButtonDemo = render(lightButtonMount, buttonTemplate, {
+        theme: defaultTheme,
+      });
+
+      const darkButtonDemo = render(darkButtonMount, buttonTemplate, {
+        theme: darkTheme,
+      });
+
+      window.genuiDemo = {
+        lightDemo,
+        darkDemo,
+        lightWidgetFileDemo,
+        darkWidgetFileDemo,
+        lightBadgeDemo,
+        darkBadgeDemo,
+        lightButtonDemo,
+        darkButtonDemo,
+      };
+    </script>
+  </body>
+</html>

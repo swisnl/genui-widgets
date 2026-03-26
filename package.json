@@ -1,0 +1,66 @@
+{
+  "name": "@swisnl/genui-widgets",
+  "version": "1.0.0",
+  "description": "Standalone Vue 3 widget renderer compatible with OpenAI ChatKit widget JSON.",
+  "type": "module",
+  "main": "./dist/genui-widgets.js",
+  "module": "./dist/genui-widgets.esm.js",
+  "types": "./dist/index.d.ts",
+  "engines": {
+    "node": ">=20"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/genui-widgets.esm.js",
+      "require": "./dist/genui-widgets.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/genui-widgets.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ],
+  "peerDependencies": {
+    "vue": "^3.5"
+  },
+  "dependencies": {
+    "dompurify": "^3.3",
+    "marked": "^17.0",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "@vitejs/plugin-vue": "^6.0",
+    "@vitest/browser-playwright": "^4.1.0",
+    "@vue/test-utils": "^2.4",
+    "eslint": "^9.38.0",
+    "eslint-plugin-vue": "^10.5.1",
+    "globals": "^16.4.0",
+    "happy-dom": "^20.8",
+    "playwright": "^1.58.2",
+    "sass": "^1.98",
+    "typescript": "^5.9",
+    "typescript-eslint": "^8.46.2",
+    "vite": "^8.0",
+    "vitest": "^4.1",
+    "vue": "^3.5",
+    "vue-eslint-parser": "^10.2.0",
+    "vue-tsc": "^3.2"
+  },
+  "scripts": {
+    "build": "npm run build:esm && npm run build:iife",
+    "build:esm": "vite build --config vite.config.esm.ts && node -e \"const fs=require('fs'); const from='dist/style.css'; const to='dist/genui-widgets.css'; if (fs.existsSync(from)) fs.renameSync(from, to);\" && tsc --project tsconfig.build.json",
+    "build:iife": "vite build --config vite.config.iife.ts && node -e \"const fs=require('fs'); const css='dist/style.css'; const js='dist/genui-widgets.js'; if (fs.existsSync(css) && fs.existsSync(js)) { const cssText=fs.readFileSync(css,'utf8'); const jsText=fs.readFileSync(js,'utf8'); const injector='(function(){if(typeof document===\\'undefined\\')return;var s=document.createElement(\\'style\\');s.setAttribute(\\'data-genui-widgets\\',\\'\\');s.textContent='+JSON.stringify(cssText)+';document.head.appendChild(s);}());\\n'; fs.writeFileSync(js, injector + jsText); fs.unlinkSync(css); }\"",
+    "demo": "vite --config vite.config.ts demo",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run --config vitest.config.ts",
+    "test:visual": "vitest run --config vitest.visual.config.ts",
+    "test:visual:update": "vitest run --config vitest.visual.config.ts --update",
+    "typecheck": "tsc --noEmit --project tsconfig.json"
+  }
+}

@@ -1,0 +1,11 @@
+@function rem($size: 1) {
+    @if($size == 1) {
+        @return var(--genui-base-size);
+    }
+
+    @if($size == 0) {
+        @return 0;
+    }
+
+    @return calc(var(--genui-base-size) * $size);
+}

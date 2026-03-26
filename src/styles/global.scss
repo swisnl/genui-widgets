@@ -1,0 +1,112 @@
+@use './apprem';
+
+.genui-widget-root {
+    --genui-base-size: 1rem;
+}
+
+.genui-widget-root {
+    font-size: apprem.rem(1);
+    position: relative;
+    line-height: 1;
+}
+
+.genui-fade-enter-active,
+.genui-fade-leave-active {
+    transition: opacity .3s ease;
+}
+
+.genui-fade-enter-from,
+.genui-fade-leave-to {
+    opacity: 0;
+}
+
+.genui-slide-enter-active,
+.genui-slide-leave-active {
+    transition: max-height .3s ease, padding .3s ease, opacity .3s ease;
+    max-height: var(--mh);
+}
+
+.genui-slide-enter-from,
+.genui-slide-leave-to {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+}
+
+.genui-fly-enter-active,
+.genui-fly-leave-active {
+    transition: all .3s ease;
+}
+
+.genui-fly-enter-from,
+.genui-fly-leave-to {
+    opacity: 0;
+    transform: translateX(apprem.rem(-1));
+}
+
+.genui-fly-staggered {
+
+    &-leave-active {
+        transition: opacity .3s linear, transform .3s ease;
+        transition-delay: calc( .1s * (var(--total) - var(--i)) );
+    }
+
+    &-enter-active {
+        transition: opacity .3s linear, transform .3s ease;
+        transition-delay: calc( .1s * var(--i) );
+    }
+
+    &-enter-from {
+        transform: translateX(apprem.rem(-1));
+        opacity: 0;
+    }
+
+    &-enter-to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    &-leave-from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    &-leave-to {
+        transform: translateX(apprem.rem(1));
+        opacity: 0;
+    }
+}
+
+.genui-rise {
+
+    &-enter-active,
+    &-leave-active {
+        transition: opacity .3s linear, transform .3s ease;
+    }
+
+    &-leave-active {
+        position: absolute;
+    }
+
+    &-enter-from {
+        transform: translateY(apprem.rem(1));
+        opacity: 0;
+    }
+
+    &-enter-to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    &-leave-from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    &-leave-to {
+        transform: translateY(apprem.rem(-1));
+        opacity: 0;
+    }
+}
