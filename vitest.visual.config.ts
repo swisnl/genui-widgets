@@ -2,6 +2,19 @@ import vue from '@vitejs/plugin-vue';
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
 
+const platformAliases: Record<string, string> = {
+  darwin: 'macos',
+  win32: 'windows',
+};
+
+const snapshotEnvironment = (() => {
+  const rawEnvironment = process.env.VISUAL_SNAPSHOT_ENV?.trim() || process.platform;
+  const normalizedEnvironment = rawEnvironment.toLowerCase();
+  const aliasedEnvironment = platformAliases[normalizedEnvironment] ?? normalizedEnvironment;
+
+  return aliasedEnvironment.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'unknown';
+})();
+
 export default defineConfig({
   plugins: [vue()],
   test: {
@@ -26,7 +39,7 @@ export default defineConfig({
             allowedMismatchedPixels: 20,
           },
           resolveScreenshotPath: ({ root, testFileDirectory, arg, ext }) =>
-            `${root}/${testFileDirectory}/__screenshots__/${arg}${ext}`,
+            `${root}/${testFileDirectory}/__screenshots__/${snapshotEnvironment}-${arg}${ext}`,
         },
       },
     },

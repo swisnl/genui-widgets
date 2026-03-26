@@ -254,7 +254,11 @@ npm run typecheck
 npm test
 npm run test:visual
 npm run test:visual:update   # refresh visual baselines
+npm run test:visual:playwright-image
+npm run test:visual:update:playwright-image   # refresh Linux baselines in the CI image
 ```
+
+Visual baselines are stored per OS with prefixes like `macos-` and `linux-`. If you need to refresh the screenshots used by GitHub Actions, run the Playwright image update command so the baselines are regenerated inside `mcr.microsoft.com/playwright:v1.58.2-noble`.
 
 ## Build output
 

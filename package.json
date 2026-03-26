@@ -68,6 +68,8 @@
     "test": "vitest run --config vitest.config.ts",
     "test:visual": "vitest run --config vitest.visual.config.ts",
     "test:visual:update": "vitest run --config vitest.visual.config.ts --update",
+    "test:visual:playwright-image": "./scripts/run-visual-tests-in-playwright-image.sh",
+    "test:visual:update:playwright-image": "./scripts/run-visual-tests-in-playwright-image.sh --update",
     "typecheck": "tsc --noEmit --project tsconfig.json"
   }
 }

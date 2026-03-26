@@ -42,6 +42,8 @@ jobs:
         run: npm run test
 
       - name: Execute visual regression tests
+        env:
+          VISUAL_SNAPSHOT_ENV: ${{ runner.os }}
         run: npm run test:visual
 
       - name: Upload artifacts
