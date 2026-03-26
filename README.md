@@ -9,7 +9,7 @@ Render OpenAI ChatKit widget JSON in any web page with a single function call.
 
 Pass a ChatKit widget payload directly to `render()` and it displays. No ChatKit dependency, no framework lock-in.
 
-![img.png](docs/assets/img.png)
+![widget.png](docs/assets/widget.png)
 
 ## Installation
 
