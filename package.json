@@ -1,6 +1,6 @@
 {
-  "name": "@swisnl/genui-widgets",
-  "version": "1.0.0",
+  "name": "@swis/genui-widgets",
+  "version": "1.0.3",
   "description": "Standalone Vue 3 widget renderer compatible with OpenAI ChatKit widget JSON.",
   "repository": {
     "type": "git",
@@ -71,5 +71,13 @@
     "test:visual:playwright-image": "./scripts/run-visual-tests-in-playwright-image.sh",
     "test:visual:update:playwright-image": "./scripts/run-visual-tests-in-playwright-image.sh --update",
     "typecheck": "tsc --noEmit --project tsconfig.json"
-  }
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "bugs": {
+    "url": "https://github.com/swisnl/genui-widgets/issues"
+  },
+  "homepage": "https://github.com/swisnl/genui-widgets#readme"
 }
