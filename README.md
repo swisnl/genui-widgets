@@ -1,4 +1,4 @@
-# `@swisnl/genui-widgets`
+# `@swis/genui-widgets`
 
 
 [![Software License](https://img.shields.io/packagist/l/swisnl/mcp-client.svg)](LICENSE.md)
@@ -14,7 +14,7 @@ Pass a ChatKit widget payload directly to `render()` and it displays. No ChatKit
 ## Installation
 
 ```bash
-npm install @swisnl/genui-widgets
+npm install @swis/genui-widgets
 ```
 
 ## IIFE bundle (no build step)
