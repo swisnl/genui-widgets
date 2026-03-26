@@ -1,8 +1,15 @@
 # `@swisnl/genui-widgets`
 
+
+[![Software License](https://img.shields.io/packagist/l/swisnl/mcp-client.svg)](LICENSE.md)
+[![Buy us a tree](https://img.shields.io/badge/Treeware-%F0%9F%8C%B3-lightgreen.svg)](https://plant.treeware.earth/swisnl/genui-widgets)
+[![Made by SWIS](https://img.shields.io/badge/%F0%9F%9A%80-made%20by%20SWIS-%230737A9.svg)](https://www.swis.nl)
+
 Render OpenAI ChatKit widget JSON in any web page with a single function call.
 
 Pass a ChatKit widget payload directly to `render()` and it displays. No ChatKit dependency, no framework lock-in.
+
+![img.png](docs/assets/img.png)
 
 ## Installation
 
@@ -256,3 +263,31 @@ npm run test:visual:update   # refresh visual baselines
 | `dist/genui-widgets.esm.js` | ESM build for bundlers |
 | `dist/genui-widgets.css` | Stylesheet for ESM consumers |
 | `dist/genui-widgets.js` | Self-contained browser bundle with CSS injection |
+
+
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+## Contributing
+
+Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
+
+## Security Vulnerabilities
+
+Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+
+## Credits
+
+- [Joris Meijer](https://github.com/jormeijer)
+- [All Contributors](../../contributors)
+
+## License
+
+This package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+This package is [Treeware](https://treeware.earth). If you use it in production, then we ask that you [**buy the world a tree**](https://plant.treeware.earth/swisnl/mcp-client) to thank us for our work. By contributing to the Treeware forest you’ll be creating employment for local families and restoring wildlife habitats.
+
+## SWIS :heart: Open Source
+
+[SWIS](https://www.swis.nl) is a web agency from Leiden, the Netherlands. We love working with open source software.
