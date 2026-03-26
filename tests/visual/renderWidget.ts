@@ -56,6 +56,7 @@ export function mountScenario(
     background: themeVars['--genui-surface-secondary'],
     boxSizing: 'border-box',
     boxShadow: '0 18px 40px rgba(15, 23, 42, 0.08)',
+    fontFamily: 'Arial, sans-serif',
   });
 
   const widget = render(target, template, { theme: resolvedTheme });
