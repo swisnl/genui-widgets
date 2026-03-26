@@ -2,6 +2,12 @@
   "name": "@swisnl/genui-widgets",
   "version": "1.0.0",
   "description": "Standalone Vue 3 widget renderer compatible with OpenAI ChatKit widget JSON.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swisnl/genui-widgets.git"
+  },
+  "author": "Joris Meijer",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/genui-widgets.js",
   "module": "./dist/genui-widgets.esm.js",
@@ -52,6 +58,7 @@
     "vue-tsc": "^3.2"
   },
   "scripts": {
+    "prepack": "npm run build",
     "build": "npm run build:esm && npm run build:iife",
     "build:esm": "vite build --config vite.config.esm.ts && node -e \"const fs=require('fs'); const from='dist/style.css'; const to='dist/genui-widgets.css'; if (fs.existsSync(from)) fs.renameSync(from, to);\" && tsc --project tsconfig.build.json",
     "build:iife": "vite build --config vite.config.iife.ts && node -e \"const fs=require('fs'); const css='dist/style.css'; const js='dist/genui-widgets.js'; if (fs.existsSync(css) && fs.existsSync(js)) { const cssText=fs.readFileSync(css,'utf8'); const jsText=fs.readFileSync(js,'utf8'); const injector='(function(){if(typeof document===\\'undefined\\')return;var s=document.createElement(\\'style\\');s.setAttribute(\\'data-genui-widgets\\',\\'\\');s.textContent='+JSON.stringify(cssText)+';document.head.appendChild(s);}());\\n'; fs.writeFileSync(js, injector + jsText); fs.unlinkSync(css); }\"",
