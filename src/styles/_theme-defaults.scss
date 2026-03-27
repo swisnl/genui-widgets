@@ -1,0 +1,195 @@
+// Default theme CSS variables
+// These are generated from the default light palette and semantic colors
+// to ensure they're available immediately when styles are imported
+
+:root {
+  // Base sizing
+  --genui-base-size: 1rem;
+
+  // Primary palette
+  --genui-primary-5: #fafafa;
+  --genui-primary-5-rgb: 250, 250, 250;
+  --genui-primary-10: #f4f4f5;
+  --genui-primary-10-rgb: 244, 244, 245;
+  --genui-primary-20: #e4e4e7;
+  --genui-primary-20-rgb: 228, 228, 231;
+  --genui-primary-30: #d4d4d8;
+  --genui-primary-30-rgb: 212, 212, 216;
+  --genui-primary-40: #a1a1aa;
+  --genui-primary-40-rgb: 161, 161, 170;
+  --genui-primary-50: #71717a;
+  --genui-primary-50-rgb: 113, 113, 122;
+  --genui-primary-60: #52525b;
+  --genui-primary-60-rgb: 82, 82, 91;
+  --genui-primary-70: #3f3f46;
+  --genui-primary-70-rgb: 63, 63, 70;
+  --genui-primary-80: #27272a;
+  --genui-primary-80-rgb: 39, 39, 42;
+  --genui-primary-90: #18181b;
+  --genui-primary-90-rgb: 24, 24, 27;
+
+  // Secondary palette
+  --genui-secondary-5: #fafafa;
+  --genui-secondary-5-rgb: 250, 250, 250;
+  --genui-secondary-10: #f4f4f5;
+  --genui-secondary-10-rgb: 244, 244, 245;
+  --genui-secondary-20: #e4e4e7;
+  --genui-secondary-20-rgb: 228, 228, 231;
+  --genui-secondary-30: #d4d4d8;
+  --genui-secondary-30-rgb: 212, 212, 216;
+  --genui-secondary-40: #a1a1aa;
+  --genui-secondary-40-rgb: 161, 161, 170;
+  --genui-secondary-50: #71717a;
+  --genui-secondary-50-rgb: 113, 113, 122;
+  --genui-secondary-60: #52525b;
+  --genui-secondary-60-rgb: 82, 82, 91;
+  --genui-secondary-70: #3f3f46;
+  --genui-secondary-70-rgb: 63, 63, 70;
+  --genui-secondary-80: #27272a;
+  --genui-secondary-80-rgb: 39, 39, 42;
+  --genui-secondary-90: #18181b;
+  --genui-secondary-90-rgb: 24, 24, 27;
+
+  // Success palette
+  --genui-success-5: #ecfdf5;
+  --genui-success-5-rgb: 236, 253, 245;
+  --genui-success-10: #d1fae5;
+  --genui-success-10-rgb: 209, 250, 229;
+  --genui-success-20: #a7f3d0;
+  --genui-success-20-rgb: 167, 243, 208;
+  --genui-success-30: #6ee7b7;
+  --genui-success-30-rgb: 110, 231, 183;
+  --genui-success-40: #34d399;
+  --genui-success-40-rgb: 52, 211, 153;
+  --genui-success-50: #10b981;
+  --genui-success-50-rgb: 16, 185, 129;
+  --genui-success-60: #059669;
+  --genui-success-60-rgb: 5, 150, 105;
+  --genui-success-70: #047857;
+  --genui-success-70-rgb: 4, 120, 87;
+  --genui-success-80: #065f46;
+  --genui-success-80-rgb: 6, 95, 70;
+  --genui-success-90: #064e3b;
+  --genui-success-90-rgb: 6, 78, 59;
+
+  // Danger palette
+  --genui-danger-5: #fef2f2;
+  --genui-danger-5-rgb: 254, 242, 242;
+  --genui-danger-10: #fee2e2;
+  --genui-danger-10-rgb: 254, 226, 226;
+  --genui-danger-20: #fecaca;
+  --genui-danger-20-rgb: 254, 202, 202;
+  --genui-danger-30: #fca5a5;
+  --genui-danger-30-rgb: 252, 165, 165;
+  --genui-danger-40: #f87171;
+  --genui-danger-40-rgb: 248, 113, 113;
+  --genui-danger-50: #ef4444;
+  --genui-danger-50-rgb: 239, 68, 68;
+  --genui-danger-60: #dc2626;
+  --genui-danger-60-rgb: 220, 38, 38;
+  --genui-danger-70: #b91c1c;
+  --genui-danger-70-rgb: 185, 28, 28;
+  --genui-danger-80: #991b1b;
+  --genui-danger-80-rgb: 153, 27, 27;
+  --genui-danger-90: #7f1d1d;
+  --genui-danger-90-rgb: 127, 29, 29;
+
+  // Warning palette
+  --genui-warning-5: #fffbeb;
+  --genui-warning-5-rgb: 255, 251, 235;
+  --genui-warning-10: #fef3c7;
+  --genui-warning-10-rgb: 254, 243, 199;
+  --genui-warning-20: #fde68a;
+  --genui-warning-20-rgb: 253, 230, 138;
+  --genui-warning-30: #fcd34d;
+  --genui-warning-30-rgb: 252, 211, 77;
+  --genui-warning-40: #fbbf24;
+  --genui-warning-40-rgb: 251, 191, 36;
+  --genui-warning-50: #f59e0b;
+  --genui-warning-50-rgb: 245, 158, 11;
+  --genui-warning-60: #d97706;
+  --genui-warning-60-rgb: 217, 119, 6;
+  --genui-warning-70: #b45309;
+  --genui-warning-70-rgb: 180, 83, 9;
+  --genui-warning-80: #92400e;
+  --genui-warning-80-rgb: 146, 64, 14;
+  --genui-warning-90: #78350f;
+  --genui-warning-90-rgb: 120, 53, 15;
+
+  // Info palette
+  --genui-info-5: #eff6ff;
+  --genui-info-5-rgb: 239, 246, 255;
+  --genui-info-10: #dbeafe;
+  --genui-info-10-rgb: 219, 234, 254;
+  --genui-info-20: #bfdbfe;
+  --genui-info-20-rgb: 191, 219, 254;
+  --genui-info-30: #93c5fd;
+  --genui-info-30-rgb: 147, 197, 253;
+  --genui-info-40: #60a5fa;
+  --genui-info-40-rgb: 96, 165, 250;
+  --genui-info-50: #3b82f6;
+  --genui-info-50-rgb: 59, 130, 246;
+  --genui-info-60: #2563eb;
+  --genui-info-60-rgb: 37, 99, 235;
+  --genui-info-70: #1d4ed8;
+  --genui-info-70-rgb: 29, 78, 216;
+  --genui-info-80: #1e40af;
+  --genui-info-80-rgb: 30, 64, 175;
+  --genui-info-90: #1e3a8a;
+  --genui-info-90-rgb: 30, 58, 138;
+
+  // Discovery palette
+  --genui-discovery-5: #f5f3ff;
+  --genui-discovery-5-rgb: 245, 243, 255;
+  --genui-discovery-10: #ede9fe;
+  --genui-discovery-10-rgb: 237, 233, 254;
+  --genui-discovery-20: #ddd6fe;
+  --genui-discovery-20-rgb: 221, 214, 254;
+  --genui-discovery-30: #c4b5fd;
+  --genui-discovery-30-rgb: 196, 181, 253;
+  --genui-discovery-40: #a78bfa;
+  --genui-discovery-40-rgb: 167, 139, 250;
+  --genui-discovery-50: #8b5cf6;
+  --genui-discovery-50-rgb: 139, 92, 246;
+  --genui-discovery-60: #7c3aed;
+  --genui-discovery-60-rgb: 124, 58, 237;
+  --genui-discovery-70: #6d28d9;
+  --genui-discovery-70-rgb: 109, 40, 217;
+  --genui-discovery-80: #5b21b6;
+  --genui-discovery-80-rgb: 91, 33, 182;
+  --genui-discovery-90: #4c1d95;
+  --genui-discovery-90-rgb: 76, 29, 149;
+
+  // Caution palette
+  --genui-caution-5: #fff7ed;
+  --genui-caution-5-rgb: 255, 247, 237;
+  --genui-caution-10: #ffedd5;
+  --genui-caution-10-rgb: 255, 237, 213;
+  --genui-caution-20: #fed7aa;
+  --genui-caution-20-rgb: 254, 215, 170;
+  --genui-caution-30: #fdba74;
+  --genui-caution-30-rgb: 253, 186, 116;
+  --genui-caution-40: #fb923c;
+  --genui-caution-40-rgb: 251, 146, 60;
+  --genui-caution-50: #f97316;
+  --genui-caution-50-rgb: 249, 115, 22;
+  --genui-caution-60: #ea580c;
+  --genui-caution-60-rgb: 234, 88, 12;
+  --genui-caution-70: #c2410c;
+  --genui-caution-70-rgb: 194, 65, 12;
+  --genui-caution-80: #9a3412;
+  --genui-caution-80-rgb: 154, 52, 18;
+  --genui-caution-90: #7c2d12;
+  --genui-caution-90-rgb: 124, 45, 18;
+
+  // Semantic colors
+  --genui-surface: #ffffff;
+  --genui-surface-secondary: #fafafa;
+  --genui-surface-tertiary: #f4f4f5;
+  --genui-text-primary: #18181b;
+  --genui-text-secondary: #52525b;
+  --genui-text-tertiary: #a1a1aa;
+  --genui-border-default: #e4e4e7;
+  --genui-disabled-bg: #f4f4f5;
+  --genui-disabled-text: #a1a1aa;
+}
