@@ -39,13 +39,21 @@ The standalone bundle includes Vue and injects CSS automatically.
 import { render } from '@swisnl/genui-widgets';
 import '@swisnl/genui-widgets/styles';
 
-render(document.getElementById('widget'), chatKitPayload, {
-  format: 'chatkit',
-  actionHooks: [
-    async (action) => {
-      console.log('Action:', action);
-    },
-  ],
+const container = document.getElementById('widget');
+
+render(container, chatKitPayload, { format: 'chatkit' });
+
+container.addEventListener('genui-action', (e) => {
+  const { action } = e.detail;
+  console.log('Action:', action);
+
+  // Register async work — buttons stay in loading state until resolved
+  e.detail.waitUntil(
+    fetch('/api/handle', { body: JSON.stringify(action) })
+  );
+
+  // Optionally stop other listeners from running
+  // e.stopImmediatePropagation();
 });
 ```
 
@@ -77,19 +85,21 @@ That's it. Pass the raw payload from the OpenAI response and the widget renders.
 
 ```vue
 <script setup lang="ts">
-import { provide } from 'vue';
-import { ACTION_HOOKS_KEY, DynamicWidget, fromChatKit } from '@swisnl/genui-widgets';
+import { DynamicWidget, fromChatKit } from '@swisnl/genui-widgets';
+import type { ActionEventDetail } from '@swisnl/genui-widgets';
 import '@swisnl/genui-widgets/styles';
 
 const template = fromChatKit(chatKitPayload);
 
-provide(ACTION_HOOKS_KEY, [
-  async (action) => console.log('Action:', action),
-]);
+function handleAction(e: CustomEvent<ActionEventDetail>) {
+  console.log('Action:', e.detail.action);
+}
 </script>
 
 <template>
-  <DynamicWidget :template="template" />
+  <div @genui-action="handleAction">
+    <DynamicWidget :template="template" />
+  </div>
 </template>
 ```
 

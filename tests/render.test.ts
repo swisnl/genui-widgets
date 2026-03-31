@@ -5,7 +5,11 @@ import { render } from '../src/render';
 describe('render', () => {
   it('mounts, dispatches actions, updates, and destroys', async () => {
     const container = document.createElement('div');
-    const hook = vi.fn().mockResolvedValue(undefined);
+    const handler = vi.fn();
+
+    container.addEventListener('genui-action', (e: Event) => {
+      handler((e as CustomEvent).detail.action);
+    });
 
     const widget = render(
       container,
@@ -13,9 +17,6 @@ describe('render', () => {
         type: 'Button',
         label: 'Click me',
         onClickAction: { type: 'ping', payload: { ok: true } },
-      },
-      {
-        actionHooks: [hook],
       },
     );
 
@@ -27,7 +28,7 @@ describe('render', () => {
     await Promise.resolve();
     await Promise.resolve();
 
-    expect(hook).toHaveBeenCalledWith({ type: 'ping', payload: { ok: true } });
+    expect(handler).toHaveBeenCalledWith({ type: 'ping', payload: { ok: true } });
 
     widget.update({
       type: 'Text',

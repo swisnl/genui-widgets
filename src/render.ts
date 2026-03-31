@@ -1,7 +1,6 @@
 import { createApp, h, ref } from 'vue';
 import DynamicWidget from './components/DynamicWidget.vue';
 import { fromChatKit } from './compat/chatkit';
-import { ACTION_HOOKS_KEY } from './injectionKeys';
 import { resolveTemplate } from './template';
 import { applyTheme, createTheme, defaultTheme } from './theme';
 import type { WidgetInstance, RenderOptions } from './types/instance';
@@ -12,7 +11,7 @@ export function render(
   template: WidgetTemplateSource,
   options: RenderOptions = {},
 ): WidgetInstance {
-  const { actionHooks = [], theme = {}, format = 'native', templateContext: initialTemplateContext = {} } = options;
+  const { theme = {}, format = 'native', templateContext: initialTemplateContext = {} } = options;
   let templateContext: TemplateContext = initialTemplateContext;
 
   const normalize = (value: WidgetTemplateSource, context: TemplateContext) => {
@@ -29,7 +28,6 @@ export function render(
     render: () => h(DynamicWidget, { template: templateRef.value }),
   });
 
-  app.provide(ACTION_HOOKS_KEY, actionHooks);
   app.mount(container);
 
   return {

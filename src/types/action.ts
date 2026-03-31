@@ -1,6 +1,9 @@
 import type { WidgetAction } from './widget';
 
-export type ActionHook = (action: WidgetAction) => void | Promise<void>;
+export interface ActionEventDetail {
+  action: WidgetAction;
+  waitUntil(promise: Promise<void>): void;
+}
 
 export interface ChatKitAction {
   type: string;
