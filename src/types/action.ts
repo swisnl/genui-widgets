@@ -2,6 +2,8 @@ import type { WidgetAction } from './widget';
 
 export interface ActionEventDetail {
   action: WidgetAction;
+  payload: Record<string, unknown> | undefined;
+  formData: Record<string, FormDataEntryValue>;
   waitUntil(promise: Promise<void>): void;
 }
 

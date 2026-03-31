@@ -44,12 +44,14 @@ const container = document.getElementById('widget');
 render(container, chatKitPayload, { format: 'chatkit' });
 
 container.addEventListener('genui-action', (e) => {
-  const { action } = e.detail;
-  console.log('Action:', action);
+  const { action, payload, formData } = e.detail;
+  console.log('Action:', action);   // { type: 'submit', payload: { ... } }
+  console.log('Payload:', payload); // shortcut for action.payload
+  console.log('Form:', formData);   // { name: 'John', email: 'john@example.com' }
 
   // Register async work — buttons stay in loading state until resolved
   e.detail.waitUntil(
-    fetch('/api/handle', { body: JSON.stringify(action) })
+    fetch('/api/handle', { body: JSON.stringify({ action, formData }) })
   );
 
   // Optionally stop other listeners from running
