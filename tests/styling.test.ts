@@ -67,6 +67,7 @@ describe('styling helpers', () => {
       WebkitBoxOrient: 'vertical',
       overflow: 'hidden',
       width: '320px',
+      flexShrink: 0,
     });
 
     expect(textStyles({

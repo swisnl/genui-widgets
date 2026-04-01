@@ -21,6 +21,7 @@ export function textStyles(options: {
   const width = toCssLength(options.width);
   if (width) {
     styles.width = width;
+    styles.flexShrink = 0;
   }
 
   return styles;

@@ -2,6 +2,7 @@ export type { VisualScenario } from './types';
 
 export { boardingPassTemplate, boardingPassScenario } from './boardingPass';
 export { checkoutCardTemplate, checkoutCardScenario } from './checkoutCard';
+export { emailComposeTemplate, emailComposeScenario } from './emailCompose';
 export { markdownSpecTemplate, markdownSpecScenario } from './markdownSpec';
 export { mediaListTemplate, mediaListScenario } from './mediaList';
 export { scheduleCardTemplate, scheduleCardScenario } from './scheduleCard';
@@ -10,6 +11,7 @@ export { summaryCardTemplate, summaryCardScenario } from './summaryCard';
 
 import { boardingPassScenario } from './boardingPass';
 import { checkoutCardScenario } from './checkoutCard';
+import { emailComposeScenario } from './emailCompose';
 import { markdownSpecScenario } from './markdownSpec';
 import { mediaListScenario } from './mediaList';
 import { scheduleCardScenario } from './scheduleCard';
@@ -23,6 +25,7 @@ export const visualScenarios: VisualScenario[] = [
   scheduleCardScenario,
   summaryCardScenario,
   settingsFormScenario,
+  emailComposeScenario,
   markdownSpecScenario,
   mediaListScenario,
 ];

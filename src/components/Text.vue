@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { computed } from 'vue';
+    import { computed, ref, onMounted, nextTick } from 'vue';
     import { blockVariant, cx } from '../styling/classes';
     import { textStyles } from '../styling/text';
 
@@ -36,6 +36,14 @@
             type: Number,
             default: null,
         },
+        minLines: {
+            type: Number,
+            default: null,
+        },
+        editable: {
+            type: Object, // { name: string, required?: boolean, placeholder?: string }
+            default: null,
+        },
         as: {
             type: String,
             default: 'p',
@@ -58,12 +66,41 @@
         maxLines: props.maxLines,
         width: props.width,
     }));
+
+    const textareaRef = ref<HTMLTextAreaElement | null>(null);
+
+    function autoGrow() {
+        const el = textareaRef.value;
+        if (!el) return;
+        el.style.height = 'auto';
+        el.style.height = `${el.scrollHeight}px`;
+    }
+
+    onMounted(() => {
+        if (props.editable) {
+            nextTick(autoGrow);
+        }
+    });
 </script>
 
 <template>
-    <component :is="as"
-               :class="classes"
-               :style="styles"
+    <textarea
+        v-if="editable"
+        ref="textareaRef"
+        class="genui-text--editable"
+        :class="classes"
+        :style="styles"
+        :name="editable.name"
+        :required="editable.required"
+        :placeholder="editable.placeholder"
+        :rows="minLines || 1"
+        @input="autoGrow"
+    >{{ value }}</textarea>
+    <component
+        v-else
+        :is="as"
+        :class="classes"
+        :style="styles"
     >
         <slot>{{ value }}</slot>
     </component>
@@ -102,5 +139,22 @@
 .genui-text--size-md { font-size: apprem.rem(1); }
 .genui-text--size-lg { font-size: apprem.rem(1.125); }
 .genui-text--size-xl { font-size: apprem.rem(1.25); }
+
+/* Editable textarea reset */
+.genui-text--editable {
+    all: unset;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font: inherit;
+    resize: none;
+    overflow: hidden;
+    line-height: 1.5;
+    color: var(--genui-text-primary);
+
+    &::placeholder {
+        color: var(--genui-text-secondary);
+    }
+}
 
 </style>

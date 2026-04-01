@@ -281,6 +281,39 @@
         </section>
         <section class="demo-section">
           <div class="section-header">
+            <p class="section-kicker">Editable Text</p>
+            <h2 class="section-title">Email Compose</h2>
+            <p class="section-copy">
+              Text elements with the <code>editable</code> prop render as textareas that visually
+              match regular text, enabling inline editing with form data collection.
+            </p>
+          </div>
+
+          <div class="preview-grid">
+            <article class="preview-panel preview-panel--light">
+              <div class="preview-meta">
+                <p class="preview-label">Normal Mode</p>
+                <p class="preview-caption">Editable text fields</p>
+              </div>
+              <div class="preview-mount">
+                <div id="light-email-demo" class="preview-frame"></div>
+              </div>
+            </article>
+
+            <article class="preview-panel preview-panel--dark">
+              <div class="preview-meta">
+                <p class="preview-label">Dark Mode</p>
+                <p class="preview-caption">Editable text fields</p>
+              </div>
+              <div class="preview-mount">
+                <div id="dark-email-demo" class="preview-frame"></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="demo-section">
+          <div class="section-header">
             <p class="section-kicker">Component</p>
             <h2 class="section-title">Badge Colors</h2>
             <p class="section-copy">
@@ -347,6 +380,7 @@
     <script type="module">
       import { darkTheme, defaultTheme, extractTemplateFromWidgetFile, render } from '../src/index.ts';
       import {airlineLogo} from "../tests/visual/templates/assets.ts";
+      import { emailComposeTemplate } from "../tests/visual/templates/emailCompose.ts";
 
       const date = {
         name: 'Friday',
@@ -490,6 +524,19 @@
         templateContext: personContext,
       });
 
+      const lightEmailMount = document.getElementById('light-email-demo');
+      const darkEmailMount = document.getElementById('dark-email-demo');
+
+      const lightEmailDemo = render(lightEmailMount, emailComposeTemplate, {
+        actionHooks,
+        theme: defaultTheme,
+      });
+
+      const darkEmailDemo = render(darkEmailMount, emailComposeTemplate, {
+        actionHooks,
+        theme: darkTheme,
+      });
+
       const badgeColors = ['secondary', 'success', 'danger', 'warning', 'info', 'discovery'];
       const badgeVariants = ['soft', 'solid', 'outline'];
 
@@ -570,6 +617,8 @@
         darkDemo,
         lightWidgetFileDemo,
         darkWidgetFileDemo,
+        lightEmailDemo,
+        darkEmailDemo,
         lightBadgeDemo,
         darkBadgeDemo,
         lightButtonDemo,
